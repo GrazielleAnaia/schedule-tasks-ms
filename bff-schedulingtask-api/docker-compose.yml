@@ -1,0 +1,60 @@
+version: '3.8'
+services:
+  scheduling-api:
+    build: ..\scheduling-api
+    container_name: scheduling-api
+    ports:
+      - "8181:8181"
+    environment:
+      - SPRING_DATA_MONGODB_URI= mongodb://mongo:27017/scheduling-api
+    depends_on:
+      - mongo
+  bff-schedulingtask-api:
+    build: .
+    container_name: bff-schedulingtask-api
+    ports:
+      - "8184:8184"
+    environment:
+      - REGISTRATION-API_URL=registration-api:8180/customer
+      - SCHEDULING-API_URL=schedulingtask-api:8180/task
+      - NOTIFICATION-API_URL=notification-api:8182/email
+
+
+  registration-api:
+    build: ..\registration-api
+    container_name: registration-api
+    ports:
+      - "8180:8180"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/registration-api
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - postgres
+  notification-api:
+    build: ..\notification-api
+    container_name: notification-api
+    ports:
+      - "8182:8182"
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: no
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: registration-api
+    ports:
+      - "5433:5432"
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: no
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: db_scheduling-api
+
+networks:
+  default:
+    driver: bridge
