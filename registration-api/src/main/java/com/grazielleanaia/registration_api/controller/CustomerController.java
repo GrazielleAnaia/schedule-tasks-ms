@@ -36,6 +36,7 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.createCustomer(customerDTO));
     }
 
+    //testing GitHub modification
     @PostMapping("/login")
     public String login(@RequestBody CustomerDTO customerDTO) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken
@@ -88,6 +89,4 @@ public class CustomerController {
                                              @RequestHeader("Authorization") String token) {
         return ResponseEntity.ok(customerService.addPhone(phoneDTO, token));
     }
-
-
 }
