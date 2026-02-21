@@ -3,7 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/bff-schedulingtask-api" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/bff-schedulingtask-api/schedule-tasks-ms" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/notification-api" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/registration-api" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/scheduling-api" vcs="Git" />
